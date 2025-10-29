@@ -11,13 +11,13 @@
       margin: 0;
       padding: 0;
       height: 100%;
+      overflow: hidden;
       font-family: 'Poppins', sans-serif;
       color: white;
       background: black;
-      overflow: hidden;
     }
 
-    /* Slideshow container */
+    /* Background slideshow container */
     .background-slideshow {
       position: fixed;
       top: 0;
@@ -26,6 +26,7 @@
       height: 100vh;
       z-index: -2;
       overflow: hidden;
+      background: #000;
     }
 
     /* Each slide */
@@ -34,10 +35,10 @@
       width: 100%;
       height: 100%;
       background-repeat: no-repeat;
-      background-position: center;
+      background-position: center center;
       background-size: cover;
       opacity: 0;
-      transition: opacity 2s ease-in-out;
+      transition: opacity 1.5s ease-in-out;
     }
 
     .bgSlide.active {
@@ -45,14 +46,16 @@
       z-index: 1;
     }
 
+    /* Dark overlay for readability */
     .background-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0,0,0,0.4);
       z-index: -1;
+      background: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
     }
 
     .content {
@@ -71,32 +74,32 @@
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 4rem;
-      background: linear-gradient(45deg, #ffda79, #ff6f61);
+      background: linear-gradient(45deg, #00d4ff, #0077ff);
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 0 0 20px #ffda79, 0 0 40px #ff6f61;
+      text-shadow: 0 0 20px #00bfff, 0 0 40px #0088ff;
       animation: glow 3s ease-in-out infinite alternate;
       margin-bottom: 10px;
     }
 
-    @keyframes glow {
-      0% { text-shadow: 0 0 15px #ffda79, 0 0 25px #ff6f61; }
-      100% { text-shadow: 0 0 30px #fff176, 0 0 50px #ff8a65; }
-    }
-
     .sub-text {
       font-size: 2rem;
-      margin-bottom: 25px;
       font-weight: 500;
       color: #fff3e0;
       text-shadow: 0 0 10px rgba(0,0,0,0.7);
+      margin-bottom: 25px;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 15px #4a148c, 0 0 25px #0077ff; }
+      100% { text-shadow: 0 0 30px #00ffff, 0 0 50px #4a148c; }
     }
 
     .reveal-btn {
       padding: 14px 30px;
       font-size: 1.1rem;
       color: white;
-      background: linear-gradient(45deg, #ff7043, #ffca28);
+      background: linear-gradient(45deg, #311b92, #00c6fb);
       border: none;
       border-radius: 30px;
       cursor: pointer;
@@ -104,12 +107,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
+      box-shadow: 0 0 15px rgba(75, 0, 130, 0.6);
     }
 
     .reveal-btn:hover {
       transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(255, 152, 0, 0.9);
+      box-shadow: 0 0 25px rgba(90, 0, 160, 0.9);
     }
 
     .hidden-message {
@@ -134,9 +137,11 @@
     .quote {
       font-style: italic;
       font-size: 1.1rem;
-      color: #ffd54f;
+      color: #9fc9ff;
       margin-top: 15px;
     }
+
+    /* Confetti and stars are optional, kept from previous design */
   </style>
 </head>
 <body>
@@ -147,6 +152,7 @@
     <div class="bgSlide" style="background-image: url('3.jpg');"></div>
     <div class="bgSlide" style="background-image: url('4.jpg');"></div>
     <div class="bgSlide" style="background-image: url('5.jpg');"></div>
+    <!-- add more images as needed -->
   </div>
 
   <div class="background-overlay"></div>
@@ -160,25 +166,26 @@
     </button>
 
     <div class="hidden-message" id="birthdayMessage">
-      <p>Hey sis — happy birthday! You’re amazing, brave, and full of heart. May your year be as wonderful as you are!</p>
-      <p class="quote">"Cats know how to find the sunshine wherever they go."</p>
+      <p>Hey sis — happy birthday! You’ve always had that mix of strength and heart that people don’t forget. No matter what comes your way, you handle it like the boss you are. Keep moving forward — the world’s better with you in it.</p>
+      <p class="quote">"Cats don’t chase validation — they just do their thing."</p>
     </div>
   </div>
 
   <script>
-    // Smooth slideshow crossfade
+    // Slideshow
     const slides = document.querySelectorAll('.bgSlide');
     let slideIndex = 0;
 
     function showSlides() {
       slides.forEach((slide, idx) => {
-        slide.style.opacity = (idx === slideIndex) ? 1 : 0;
+        slide.classList.remove('active');
       });
+      slides[slideIndex].classList.add('active');
       slideIndex = (slideIndex + 1) % slides.length;
       setTimeout(showSlides, 4000);
     }
 
-    window.onload = () => showSlides();
+    window.onload = showSlides;
 
     // Reveal birthday message
     function revealMessage() {
