@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PawPrint-Whispers 🐾</title>
+  <title>PawPrint-Whispers 🐱</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
@@ -12,48 +12,57 @@
       padding: 0;
       height: 100%;
       font-family: 'Poppins', sans-serif;
-      color: #fff;
+      color: white;
+      background: black;
       overflow: hidden;
-      background: #000;
     }
 
-    /* --- Slideshow --- */
+    /* Slideshow container */
     .background-slideshow {
       position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
       overflow: hidden;
-      z-index: 0;
     }
+
+    /* Each slide */
     .bgSlide {
       position: absolute;
-      top: 0; left: 0;
       width: 100%;
       height: 100%;
+      background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
       opacity: 0;
-      transition: opacity 1.8s ease-in-out;
+      transition: opacity 2s ease-in-out;
     }
-    .bgSlide.active { opacity: 1; }
 
-    .background-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
+    .bgSlide.active {
+      opacity: 1;
       z-index: 1;
     }
 
-    /* --- Content --- */
+    .background-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
     .content {
       position: relative;
-      z-index: 2;
-      height: 100vh;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      height: 100vh;
       text-align: center;
       padding: 20px;
       text-shadow: 0 0 8px rgba(0,0,0,0.9);
@@ -62,182 +71,124 @@
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 4rem;
-      background: linear-gradient(45deg, #a8e6cf, #56c596);
+      background: linear-gradient(45deg, #ffda79, #ff6f61);
       -webkit-background-clip: text;
       color: transparent;
-      text-shadow: 0 0 20px #a8e6cf, 0 0 40px #56c596;
+      text-shadow: 0 0 20px #ffda79, 0 0 40px #ff6f61;
       animation: glow 3s ease-in-out infinite alternate;
-      margin-bottom: 25px;
+      margin-bottom: 10px;
     }
 
     @keyframes glow {
-      0% { text-shadow: 0 0 15px #4caf50, 0 0 25px #a8e6cf; }
-      100% { text-shadow: 0 0 30px #a8e6cf, 0 0 50px #4caf50; }
+      0% { text-shadow: 0 0 15px #ffda79, 0 0 25px #ff6f61; }
+      100% { text-shadow: 0 0 30px #fff176, 0 0 50px #ff8a65; }
+    }
+
+    .sub-text {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      font-weight: 500;
+      color: #fff3e0;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
     }
 
     .reveal-btn {
       padding: 14px 30px;
       font-size: 1.1rem;
       color: white;
-      background: linear-gradient(45deg, #81c784, #4caf50);
+      background: linear-gradient(45deg, #ff7043, #ffca28);
       border: none;
       border-radius: 30px;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+      transition: transform 0.3s ease, opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(255, 152, 0, 0.6);
     }
 
     .reveal-btn:hover {
       transform: scale(1.08);
-      box-shadow: 0 0 25px rgba(129, 199, 132, 0.9);
+      box-shadow: 0 0 25px rgba(255, 152, 0, 0.9);
     }
 
-    /* --- Modal --- */
-    .modal {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .hidden-message {
+      margin-top: 30px;
+      max-width: 650px;
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      z-index: 5;
+      transform: translateY(30px);
+      transition: all 1.2s ease;
+      font-size: 1.4rem;
+      color: #cfd8dc;
+      line-height: 1.7;
+      display: none;
+      text-shadow: 0 0 6px rgba(0,0,0,0.7);
     }
-    .modal.show {
+
+    .hidden-message.show {
+      display: block;
       opacity: 1;
-      pointer-events: all;
-    }
-    .modal-content {
-      background: #263238;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 500px;
-      color: #e0f7fa;
-      box-shadow: 0 0 25px rgba(76,175,80,0.8);
-      animation: pop 0.5s ease;
+      transform: translateY(0);
     }
 
-    @keyframes pop {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .close-btn {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #4caf50;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .close-btn:hover {
-      background: #66bb6a;
-    }
-
-    /* --- Stars --- */
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      opacity: 0.8;
-      border-radius: 50%;
-      animation: twinkle 4s infinite ease-in-out;
-      z-index: 1;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 1; }
-    }
-
-    @media screen and (max-width: 600px) {
-      h1 { font-size: 2.8rem; }
-      .reveal-btn { font-size: 1rem; padding: 12px 20px; }
+    .quote {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #ffd54f;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Slideshow -->
   <div class="background-slideshow">
     <div class="bgSlide active" style="background-image: url('1.jpg');"></div>
+    <div class="bgSlide" style="background-image: url('2.jpg');"></div>
     <div class="bgSlide" style="background-image: url('3.jpg');"></div>
-    <div class="bgSlide" style="background-image: url('9.jpg');"></div>
-    <div class="bgSlide" style="background-image: url('14.jpg');"></div>
-    <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('30.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('33.PNG');"></div>
-    <div class="bgSlide" style="background-image: url('38.PNG');"></div>
-    <div class="bgSlide" style="background-image: url('42.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('43.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('45.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('47.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('49.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('50.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('61.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('67.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('74.jpeg');"></div>
-    <div class="bgSlide" style="background-image: url('Black-Kitten.jpg');"></div>
+    <div class="bgSlide" style="background-image: url('4.jpg');"></div>
+    <div class="bgSlide" style="background-image: url('5.jpg');"></div>
   </div>
 
   <div class="background-overlay"></div>
 
-  <!-- Main content -->
   <div class="content">
-    <h1>Happy Birthday, My Cool Cat 🐱</h1>
-    <button class="reveal-btn" id="revealBtn">Click to reveal your surprise 🎁</button>
-  </div>
+    <h1>Happy Birthday, Sis 🐱</h1>
+    <div class="sub-text">Cute Cat</div>
 
-  <!-- Modal -->
-  <div class="modal" id="birthdayModal">
-    <div class="modal-content">
-      <h2>Surprise! 🎉</h2>
-      <p>Happy Birthday! You’re strong, wild, and full of heart — just like the animals you love.  
-      Keep exploring, smiling, and being your amazing self. 🐾💚</p>
-      <img src="cute_cat.gif" alt="Cute Cat" width="200" style="border-radius:10px; margin-top:15px;">
-      <br>
-      <button class="close-btn" id="closeBtn">Aww, Thanks 💚</button>
+    <button class="reveal-btn" id="revealBtn" onclick="revealMessage()">
+      Click to reveal your birthday message 💬
+    </button>
+
+    <div class="hidden-message" id="birthdayMessage">
+      <p>Hey sis — happy birthday! You’re amazing, brave, and full of heart. May your year be as wonderful as you are!</p>
+      <p class="quote">"Cats know how to find the sunshine wherever they go."</p>
     </div>
   </div>
 
   <script>
-    // Stars
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.top = Math.random() * 100 + '%';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 5 + 's';
-      document.body.appendChild(star);
-    }
-
-    // Slideshow
+    // Smooth slideshow crossfade
     const slides = document.querySelectorAll('.bgSlide');
     let slideIndex = 0;
+
     function showSlides() {
-      slides.forEach(slide => slide.classList.remove('active'));
+      slides.forEach((slide, idx) => {
+        slide.style.opacity = (idx === slideIndex) ? 1 : 0;
+      });
       slideIndex = (slideIndex + 1) % slides.length;
-      slides[slideIndex].classList.add('active');
       setTimeout(showSlides, 4000);
     }
-    window.addEventListener('load', () => setTimeout(showSlides, 4000));
 
-    // Modal
-    const modal = document.getElementById('birthdayModal');
-    const btn = document.getElementById('revealBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    btn.addEventListener('click', () => modal.classList.add('show'));
-    closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+    window.onload = () => showSlides();
+
+    // Reveal birthday message
+    function revealMessage() {
+      const msg = document.getElementById('birthdayMessage');
+      const btn = document.getElementById('revealBtn');
+      msg.classList.add('show');
+      btn.style.opacity = '0';
+      setTimeout(() => btn.style.display = 'none', 400);
+    }
   </script>
-
 </body>
 </html>
-
 
