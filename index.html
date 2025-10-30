@@ -13,7 +13,7 @@ html, body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
   color: white;
-  background: none;
+  background: transparent;
   overflow-x: hidden;
 }
 
@@ -38,6 +38,7 @@ html, body {
   background-size: cover;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
+  background-color: transparent; /* prevent white flash */
 }
 
 .bgSlide.active {
@@ -45,6 +46,7 @@ html, body {
   z-index: 1;
 }
 
+/* Content box */
 .content {
   position: relative;
   z-index: 10;
@@ -55,6 +57,8 @@ html, body {
   align-items: center;
   text-align: center;
   padding: 30px 20px;
+  background: none; /* removed blur and background */
+  border-radius: 20px;
   max-width: 600px;
   margin: 40px auto;
 }
@@ -99,8 +103,6 @@ h1 {
   line-height: 1.6;
   display: none;
   user-select: text;
-  background: transparent; /* Removed blur/white box */
-  box-shadow: none;
 }
 
 .hidden-message.show {
@@ -206,7 +208,7 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic (starts immediately)
+// Slideshow logic
 const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
 
@@ -217,7 +219,8 @@ function showSlides() {
   setTimeout(showSlides, 4000);
 }
 
-showSlides(); // start immediately
+// Start slideshow immediately
+showSlides();
 
 // Reveal message & hide button
 function revealMessage() {
