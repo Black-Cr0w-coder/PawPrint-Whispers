@@ -36,10 +36,15 @@ html, body {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  display: none; /* hide initially */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
 }
 
-/* Main content container */
+.bgSlide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
 .content {
   position: relative;
   z-index: 10;
@@ -156,7 +161,7 @@ h1 {
 <body>
 
 <div class="background-slideshow" aria-label="Slideshow of animals">
-  <div class="bgSlide" style="background-image: url('1.jpg');"></div>
+  <div class="bgSlide active" style="background-image: url('1.jpg');"></div>
   <div class="bgSlide" style="background-image: url('14.jpg');"></div>
   <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
@@ -203,18 +208,20 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow
+// Slideshow logic (fade like your sister's version)
 const slides = document.querySelectorAll('.bgSlide');
-let current = 0;
-slides[current].style.display = 'block'; // show first slide
+let slideIndex = 0;
 
-function showNextSlide() {
-  slides[current].style.display = 'none';
-  current = (current + 1) % slides.length;
-  slides[current].style.display = 'block';
+function showSlides() {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
+  setTimeout(showSlides, 4000);
 }
 
-setInterval(showNextSlide, 4000);
+window.onload = () => {
+  setTimeout(showSlides, 4000);
+};
 
 // Reveal message & hide button
 function revealMessage() {
@@ -236,5 +243,4 @@ function hideSurprise() {
 
 </body>
 </html>
-
 
