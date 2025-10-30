@@ -34,7 +34,7 @@ html, body {
   height: 100vh;
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: cover;
+  background-size: contain; /* same as original */
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
 }
@@ -42,6 +42,18 @@ html, body {
 .bgSlide.active {
   opacity: 1;
   z-index: 1;
+}
+
+/* Dark overlay for text visibility */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.4);
+  pointer-events: none;
 }
 
 .content {
@@ -59,7 +71,7 @@ html, body {
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 3.8rem;
-  background: linear-gradient(45deg, #6c63ff, #00d4ff);
+  background: linear-gradient(45deg, #6c63ff, #00d4ff); /* less green */
   -webkit-background-clip: text;
   color: transparent;
   text-shadow: 0 0 15px #6c63ff, 0 0 25px #00d4ff;
@@ -68,33 +80,37 @@ h1 {
 }
 
 .reveal-btn {
-  padding: 14px 32px;
-  font-size: 1.2rem;
+  padding: 14px 30px;
+  font-size: 1.1rem;
   color: white;
-  background: linear-gradient(45deg, #6c63ff, #00d4ff);
+  background: linear-gradient(45deg, #311b92, #00c6fb); /* original style */
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.4s ease;
-  box-shadow: 0 0 15px #6c63ff;
-  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(75, 0, 130, 0.6);
 }
 
 .reveal-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #00d4ff;
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(90, 0, 160, 0.9);
 }
 
 .hidden-message {
   margin-top: 30px;
-  max-width: 100%;
+  max-width: 650px;
   opacity: 0;
   transform: translateY(30px);
   transition: all 1.2s ease;
-  font-size: 1.3rem;
-  color: #e0f7fa;
-  line-height: 1.6;
+  font-size: 1.4rem;
+  color: #cfd8dc;
+  line-height: 1.7;
   display: none;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
 }
 
 .hidden-message.show {
@@ -103,25 +119,11 @@ h1 {
   transform: translateY(0);
 }
 
-.hidden-message h2 {
-  margin-bottom: 10px;
-  color: #00d4ff;
-}
-
-.hidden-message img {
-  max-width: 220px;
-  border-radius: 15px;
-  margin-top: 20px;
-  box-shadow: 0 0 20px #00d4ffaa;
-  user-select: none;
-}
-
-.caption {
-  color: #00d4ff;
+.quote {
   font-style: italic;
-  margin-top: 8px;
   font-size: 1.1rem;
-  user-select: none;
+  color: #9fc9ff;
+  margin-top: 15px;
 }
 
 /* Stars */
@@ -140,38 +142,51 @@ h1 {
   50% { opacity: 1; }
 }
 
-/* Responsive */
+/* Confetti */
+.confetti {
+  position: absolute;
+  top: -10vh;
+  width: 8px;
+  height: 12px;
+  opacity: 0.7;
+  border-radius: 2px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
+
 @media screen and (max-width: 600px) {
   h1 { font-size: 2.8rem; }
-  .reveal-btn { font-size: 1rem; padding: 12px 24px; }
+  .reveal-btn { font-size: 1rem; padding: 12px 20px; }
   .hidden-message { font-size: 1.1rem; }
-  .hidden-message img { max-width: 90vw; }
 }
 </style>
 </head>
 <body>
 
-<div class="background-slideshow" aria-label="Slideshow of animals">
+<div class="background-slideshow">
   <div class="bgSlide active" style="background-image: url('1.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('14.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('2.jpg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('30.JPEG');"></div>
+  <div class="bgSlide" style="background-image: url('4.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('5.jpg');"></div>
 </div>
 
-<div class="content" role="main">
-  <h1>Happy Birthday, My lil Sis🐾</h1>
+<div class="background-overlay"></div>
+
+<div class="content">
+  <h1>Happy Birthday My lil Sis 🐾</h1>
 
   <button class="reveal-btn" id="revealBtn" onclick="revealMessage()">
-    Click to reveal your surprise 🎁
+    Click to reveal your birthday message 💬
   </button>
 
-  <div class="hidden-message" id="birthdayMessage" role="region" aria-live="polite" aria-atomic="true">
-    <h2>Surprise! 🎉</h2>
-    <p>Happy Birthday! You’re strong, wild, and full of heart — just like the animals you love. Keep exploring, smiling, and being your amazing self.</p>
-    <img src="Black Kitten-.jpg" alt="Cute Cat" />
-    <p class="caption">Cute Cat</p>
-    <button class="reveal-btn" onclick="hideSurprise()">Close</button>
+  <div class="hidden-message" id="birthdayMessage">
+    <p>Hey sis — happy birthday! You’ve always had that mix of strength and heart that people don’t forget. No matter what comes your way, you handle it like the boss you are. Keep moving forward — the world’s better with you in it.</p>
+    <p class="quote">"Wolves don’t chase validation — they just keep running."</p>
   </div>
 </div>
 
@@ -186,22 +201,20 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic (fade)
-const slides = document.querySelectorAll('.bgSlide');
-let slideIndex = 0;
-
-function showSlides() {
-  slides.forEach(slide => slide.classList.remove('active'));
-  slideIndex = (slideIndex + 1) % slides.length;
-  slides[slideIndex].classList.add('active');
-  setTimeout(showSlides, 4000);
+// Confetti
+const confettiColors = ['#00bcd4', '#00e5ff', '#9e9e9e', '#4a148c', '#311b92', '#607d8b'];
+for (let i = 0; i < 80; i++) {
+  const conf = document.createElement('div');
+  conf.classList.add('confetti');
+  conf.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+  conf.style.left = Math.random() * 100 + 'vw';
+  conf.style.animationDuration = (5 + Math.random() * 5) + 's';
+  conf.style.animationDelay = Math.random() * 5 + 's';
+  conf.style.width = (4 + Math.random() * 6) + 'px';
+  conf.style.height = (8 + Math.random() * 10) + 'px';
+  conf.style.transform = `translateX(${Math.random() * 40 - 20}px)`;
+  document.body.appendChild(conf);
 }
-
-// Start slideshow immediately
-window.onload = () => {
-  slides[0].classList.add('active');
-  setTimeout(showSlides, 4000);
-};
 
 // Reveal message & hide button
 function revealMessage() {
@@ -212,13 +225,21 @@ function revealMessage() {
   setTimeout(() => btn.style.display = 'none', 400);
 }
 
-function hideSurprise() {
-  const msg = document.getElementById('birthdayMessage');
-  const btn = document.getElementById('revealBtn');
-  msg.classList.remove('show');
-  btn.style.display = 'inline-block';
-  setTimeout(() => btn.style.opacity = '1', 100);
+// Slideshow
+const slides = document.querySelectorAll('.bgSlide');
+let slideIndex = 0;
+
+function showSlides() {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
+  setTimeout(showSlides, 4000);
 }
+
+window.onload = () => {
+  slides[0].classList.add('active');
+  setTimeout(showSlides, 4000);
+};
 </script>
 
 </body>
