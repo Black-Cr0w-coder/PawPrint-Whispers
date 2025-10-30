@@ -13,11 +13,10 @@ html, body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
   color: white;
-  background: transparent;
+  background: transparent; /* transparent background */
   overflow-x: hidden;
 }
 
-/* Background slideshow container */
 .background-slideshow {
   position: fixed;
   top: 0;
@@ -28,7 +27,6 @@ html, body {
   overflow: hidden;
 }
 
-/* Each slide */
 .bgSlide {
   position: absolute;
   width: 100vw;
@@ -37,12 +35,13 @@ html, body {
   background-position: center center;
   background-size: cover;
   opacity: 0;
+  visibility: hidden; /* hide until active */
   transition: opacity 1.5s ease-in-out;
-  background-color: transparent; /* prevent white flash */
 }
 
 .bgSlide.active {
   opacity: 1;
+  visibility: visible;
   z-index: 1;
 }
 
@@ -100,7 +99,6 @@ h1 {
   transition: all 1.2s ease;
   font-size: 1.3rem;
   color: #d9f4d9;
-  line-height: 1.6;
   display: none;
   user-select: text;
 }
@@ -161,7 +159,7 @@ h1 {
 <body>
 
 <div class="background-slideshow" aria-label="Slideshow of animals">
-  <div class="bgSlide active" style="background-image: url('1.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('1.jpg');"></div>
   <div class="bgSlide" style="background-image: url('14.jpg');"></div>
   <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
@@ -208,19 +206,41 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic
+// Preload all slideshow images
+const slideImages = [
+  '1.jpg','14.jpg','21.jpeg','3.jpg','30.jpeg','33.png','38.png','42.jpeg',
+  '43.jpeg','45.jpeg','47.jpeg','49.jpeg','50.jpeg','61.jpeg','67.jpeg','74.jpeg',
+  '9.jpg','Black Kitten-.jpg'
+];
+let loadedImages = 0;
+
+slideImages.forEach(src => {
+  const img = new Image();
+  img.src = src;
+  img.onload = () => {
+    loadedImages++;
+    // Start slideshow when all images are loaded
+    if (loadedImages === slideImages.length) {
+      startSlideshow();
+    }
+  };
+});
+
 const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
 
-function showSlides() {
-  slides.forEach(slide => slide.classList.remove('active'));
-  slides[slideIndex].classList.add('active');
-  slideIndex = (slideIndex + 1) % slides.length;
-  setTimeout(showSlides, 4000);
-}
+function startSlideshow() {
+  slides[0].classList.add('active'); // show first slide immediately
 
-// Start slideshow immediately
-showSlides();
+  function showSlides() {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[slideIndex].classList.add('active');
+    slideIndex = (slideIndex + 1) % slides.length;
+    setTimeout(showSlides, 4000);
+  }
+
+  showSlides();
+}
 
 // Reveal message & hide button
 function revealMessage() {
