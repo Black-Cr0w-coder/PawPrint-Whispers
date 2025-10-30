@@ -36,7 +36,7 @@
       height: 100vh;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: cover; /* fill screen nicely */
+      background-size: cover;
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
@@ -225,16 +225,18 @@
       document.body.appendChild(star);
     }
 
-    // Slideshow logic
+    // Slideshow logic (fixed)
     const slides = document.querySelectorAll('.bgSlide');
     let slideIndex = 0;
 
     function showSlides() {
       slides.forEach(slide => slide.classList.remove('active'));
-      slideIndex = (slideIndex + 1) % slides.length;
       slides[slideIndex].classList.add('active');
+      slideIndex = (slideIndex + 1) % slides.length;
       setTimeout(showSlides, 4000);
     }
+
+    window.onload = showSlides;
 
     // Reveal message & hide button
     function revealMessage() {
@@ -252,10 +254,6 @@
       btn.style.display = 'inline-block';
       setTimeout(() => btn.style.opacity = '1', 100);
     }
-
-    window.onload = () => {
-      setTimeout(showSlides, 4000);
-    };
   </script>
 
 </body>
