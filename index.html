@@ -56,7 +56,7 @@ html, body {
   text-align: center;
   padding: 30px 20px;
   background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 25px #1b4628;
+  box-shadow: 0 0 15px #2b5c32; /* softer glow */
   border-radius: 20px;
   max-width: 600px;
   margin: 40px auto;
@@ -66,10 +66,10 @@ html, body {
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 3.8rem;
-  background: linear-gradient(45deg, #56ab2f, #a8e063);
+  background: linear-gradient(45deg, #66b16f, #b0e6a0); /* softer gradient */
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 0 0 15px #a8e063, 0 0 25px #56ab2f;
+  text-shadow: 0 0 10px #b0e6a0, 0 0 20px #66b16f; /* less intense glow */
   margin-bottom: 25px;
   user-select: none;
 }
@@ -78,18 +78,18 @@ h1 {
   padding: 14px 32px;
   font-size: 1.2rem;
   color: white;
-  background: linear-gradient(45deg, #56ab2f, #a8e063);
+  background: linear-gradient(45deg, #66b16f, #b0e6a0); /* softer gradient */
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.4s ease;
-  box-shadow: 0 0 15px #4caf50;
+  box-shadow: 0 0 10px #66b16f; /* softer shadow */
   margin-top: 15px;
 }
 
 .reveal-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px #7fff00;
+  box-shadow: 0 0 20px #9fe69a; /* softer hover glow */
 }
 
 .hidden-message {
@@ -113,19 +113,19 @@ h1 {
 
 .hidden-message h2 {
   margin-bottom: 10px;
-  color: #a8e063;
+  color: #b0e6a0; /* softer */
 }
 
 .hidden-message img {
   max-width: 220px;
   border-radius: 15px;
   margin-top: 20px;
-  box-shadow: 0 0 20px #4caf50aa;
+  box-shadow: 0 0 15px #66b16faa; /* softer */
   user-select: none;
 }
 
 .caption {
-  color: #a8e063;
+  color: #b0e6a0;
   font-style: italic;
   margin-top: 8px;
   font-size: 1.1rem;
@@ -208,7 +208,7 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic (correct fade loop)
+// Slideshow logic
 const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
 
@@ -219,7 +219,6 @@ function showSlides() {
   setTimeout(showSlides, 4000);
 }
 
-// Start slideshow immediately
 window.onload = () => {
   slides[0].classList.add('active');
   setTimeout(showSlides, 4000);
