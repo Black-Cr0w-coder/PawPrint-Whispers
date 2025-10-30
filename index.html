@@ -13,7 +13,7 @@ html, body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
   color: white;
-  background: #000; /* temporary black background to avoid white flash */
+  background: transparent;
   overflow-x: hidden;
 }
 
@@ -38,13 +38,12 @@ html, body {
   background-size: cover;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
-  visibility: hidden;
+  background-color: transparent; /* prevent white flash */
 }
 
 .bgSlide.active {
   opacity: 1;
   z-index: 1;
-  visibility: visible;
 }
 
 /* Content box */
@@ -162,7 +161,7 @@ h1 {
 <body>
 
 <div class="background-slideshow" aria-label="Slideshow of animals">
-  <div class="bgSlide" style="background-image: url('1.jpg');"></div>
+  <div class="bgSlide active" style="background-image: url('1.jpg');"></div>
   <div class="bgSlide" style="background-image: url('14.jpg');"></div>
   <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
@@ -209,15 +208,10 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Preload slides
-const slides = document.querySelectorAll('.bgSlide');
-slides.forEach(slide => {
-  const img = new Image();
-  img.src = slide.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-});
-
 // Slideshow logic
+const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
+
 function showSlides() {
   slides.forEach(slide => slide.classList.remove('active'));
   slides[slideIndex].classList.add('active');
@@ -225,8 +219,7 @@ function showSlides() {
   setTimeout(showSlides, 4000);
 }
 
-// Start slideshow immediately after first image loads
-slides[0].addEventListener('load', showSlides);
+// Start slideshow immediately
 showSlides();
 
 // Reveal message & hide button
