@@ -12,9 +12,8 @@ html, body {
   padding: 0;
   height: 100%;
   font-family: 'Poppins', sans-serif;
-  color: white;
-  background: #000;
-  overflow-x: hidden;
+  overflow: hidden;
+  background: transparent;
 }
 
 /* Background slideshow container */
@@ -55,21 +54,15 @@ html, body {
   align-items: center;
   text-align: center;
   padding: 30px 20px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 25px #1b4628;
-  border-radius: 20px;
-  max-width: 600px;
-  margin: 40px auto;
-  backdrop-filter: blur(10px);
 }
 
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 3.8rem;
-  background: linear-gradient(45deg, #56ab2f, #a8e063);
+  background: linear-gradient(45deg, #6c63ff, #00d4ff);
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 0 0 15px #a8e063, 0 0 25px #56ab2f;
+  text-shadow: 0 0 15px #6c63ff, 0 0 25px #00d4ff;
   margin-bottom: 25px;
   user-select: none;
 }
@@ -78,18 +71,18 @@ h1 {
   padding: 14px 32px;
   font-size: 1.2rem;
   color: white;
-  background: linear-gradient(45deg, #56ab2f, #a8e063);
+  background: linear-gradient(45deg, #6c63ff, #00d4ff);
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.4s ease;
-  box-shadow: 0 0 15px #4caf50;
+  box-shadow: 0 0 15px #6c63ff;
   margin-top: 15px;
 }
 
 .reveal-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 30px #7fff00;
+  box-shadow: 0 0 30px #00d4ff;
 }
 
 .hidden-message {
@@ -99,10 +92,9 @@ h1 {
   transform: translateY(30px);
   transition: all 1.2s ease;
   font-size: 1.3rem;
-  color: #d9f4d9;
+  color: #e0f7fa;
   line-height: 1.6;
   display: none;
-  user-select: text;
 }
 
 .hidden-message.show {
@@ -113,19 +105,19 @@ h1 {
 
 .hidden-message h2 {
   margin-bottom: 10px;
-  color: #a8e063;
+  color: #00d4ff;
 }
 
 .hidden-message img {
   max-width: 220px;
   border-radius: 15px;
   margin-top: 20px;
-  box-shadow: 0 0 20px #4caf50aa;
+  box-shadow: 0 0 20px #00d4ffaa;
   user-select: none;
 }
 
 .caption {
-  color: #a8e063;
+  color: #00d4ff;
   font-style: italic;
   margin-top: 8px;
   font-size: 1.1rem;
@@ -154,7 +146,6 @@ h1 {
   .reveal-btn { font-size: 1rem; padding: 12px 24px; }
   .hidden-message { font-size: 1.1rem; }
   .hidden-message img { max-width: 90vw; }
-  .content { margin: 20px 10px; padding: 25px 15px; }
 }
 </style>
 </head>
@@ -166,23 +157,10 @@ h1 {
   <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
   <div class="bgSlide" style="background-image: url('30.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('33.PNG');"></div>
-  <div class="bgSlide" style="background-image: url('38.PNG');"></div>
-  <div class="bgSlide" style="background-image: url('42.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('43.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('45.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('47.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('49.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('50.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('61.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('67.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('74.jpeg');"></div>
-  <div class="bgSlide" style="background-image: url('9.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('Black Kitten-.jpg');"></div>
 </div>
 
 <div class="content" role="main">
-  <h1>Happy Birthday, My lil Sis 🐾</h1>
+  <h1>Happy Birthday, My lil Sis🐾</h1>
 
   <button class="reveal-btn" id="revealBtn" onclick="revealMessage()">
     Click to reveal your surprise 🎁
@@ -208,7 +186,7 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic (fade like your sister's version)
+// Slideshow logic (fade)
 const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
 
@@ -219,7 +197,9 @@ function showSlides() {
   setTimeout(showSlides, 4000);
 }
 
+// Start slideshow immediately
 window.onload = () => {
+  slides[0].classList.add('active');
   setTimeout(showSlides, 4000);
 };
 
@@ -243,4 +223,3 @@ function hideSurprise() {
 
 </body>
 </html>
-
