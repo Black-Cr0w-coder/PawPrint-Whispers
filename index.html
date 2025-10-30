@@ -208,19 +208,30 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic (fade effect)
+// Slideshow logic (debug version)
 const slides = document.querySelectorAll('.bgSlide');
+console.log('Slides found:', slides.length);
+
 let slideIndex = 0;
+slides.forEach((slide, idx) => {
+  console.log(`Slide ${idx} background:`, slide.style.backgroundImage);
+});
 
 function showSlides() {
   slides.forEach(slide => slide.classList.remove('active'));
   slideIndex = (slideIndex + 1) % slides.length;
   slides[slideIndex].classList.add('active');
-  setTimeout(showSlides, 4000);
+  console.log('Showing slide index:', slideIndex);
+  setTimeout(showSlides, 3000);
 }
 
 window.onload = () => {
-  setTimeout(showSlides, 4000);
+  if (slides.length > 0) {
+    console.log('Starting slideshow...');
+    setTimeout(showSlides, 3000);
+  } else {
+    console.log('No slides found, slideshow won’t start.');
+  }
 };
 
 // Reveal message & hide button
