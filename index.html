@@ -36,7 +36,7 @@
       height: 100vh;
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: cover;
+      background-size: cover; 
       opacity: 0;
       transition: opacity 1.5s ease-in-out;
     }
@@ -199,7 +199,7 @@
   <div class="background-overlay"></div>
 
   <div class="content" role="main">
-    <h1>Happy Birthday, My lil sis 🐾</h1>
+    <h1>Happy Birthday, My lil Sis 🐾</h1>
 
     <button class="reveal-btn" id="revealBtn" onclick="revealMessage()">
       Click to reveal your surprise 🎁
@@ -225,7 +225,7 @@
       document.body.appendChild(star);
     }
 
-    // Slideshow logic (fixed)
+    // Correct slideshow logic
     const slides = document.querySelectorAll('.bgSlide');
     let slideIndex = 0;
 
@@ -236,7 +236,7 @@
       setTimeout(showSlides, 4000);
     }
 
-    window.onload = showSlides;
+    window.addEventListener('load', showSlides);
 
     // Reveal message & hide button
     function revealMessage() {
