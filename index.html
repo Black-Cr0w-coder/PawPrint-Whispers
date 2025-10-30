@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Happy Birthday!</title>
+<title>Happy Birthday, Sis 🐺</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
 
@@ -11,12 +11,12 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
   overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  color: white;
   background: transparent;
 }
 
-/* Background slideshow */
 .background-slideshow {
   position: fixed;
   top: 0;
@@ -43,7 +43,6 @@ html, body {
   z-index: 1;
 }
 
-/* Overlay */
 .background-overlay {
   position: fixed;
   top: 0;
@@ -55,15 +54,14 @@ html, body {
   pointer-events: none;
 }
 
-/* Content */
 .content {
   position: relative;
   z-index: 10;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
   text-align: center;
   padding: 20px;
   text-shadow: 0 0 8px rgba(0,0,0,0.9);
@@ -158,17 +156,30 @@ h1 {
 <body>
 
 <div class="background-slideshow">
-  <div class="bgSlide active" style="background-image: url('Image1.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('Image2.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('Image3.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('Image4.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('Image5.jpg');"></div>
+  <div class="bgSlide active" style="background-image: url('Image 1.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 2.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 3.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 4.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 5.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 6.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 7.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 8.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 9.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 10.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 11.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 12.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 13.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 14.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 15.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 16.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 17.jpg');"></div>
+  <div class="bgSlide" style="background-image: url('Image 18.jpg');"></div>
 </div>
 
 <div class="background-overlay"></div>
 
 <div class="content">
-  <h1>Happy Birthday My lil Sis🐾<</h1>
+  <h1>Happy Birthday My lil Sis </h1>
 
   <button class="reveal-btn" id="revealBtn" onclick="revealMessage()">
     Click to reveal your birthday message 💬
@@ -206,11 +217,12 @@ let slideIndex = 0;
 
 function showSlides() {
   slides.forEach(slide => slide.classList.remove('active'));
-  slideIndex = (slideIndex + 1) % slides.length;
   slides[slideIndex].classList.add('active');
+  slideIndex = (slideIndex + 1) % slides.length;
   setTimeout(showSlides, 4000);
 }
 
+// Start slideshow when window loads
 window.onload = () => {
   slides[0].classList.add('active');
   setTimeout(showSlides, 4000);
