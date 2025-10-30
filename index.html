@@ -13,8 +13,8 @@ html, body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
   color: white;
+  background: none;
   overflow-x: hidden;
-  background: none; /* removed black background */
 }
 
 /* Background slideshow container */
@@ -55,12 +55,8 @@ html, body {
   align-items: center;
   text-align: center;
   padding: 30px 20px;
-  background: rgba(0, 0, 0, 0.3); /* slightly see-through overlay for readability */
-  box-shadow: 0 0 25px #1b4628;
-  border-radius: 20px;
   max-width: 600px;
   margin: 40px auto;
-  backdrop-filter: blur(10px);
 }
 
 h1 {
@@ -103,6 +99,8 @@ h1 {
   line-height: 1.6;
   display: none;
   user-select: text;
+  background: transparent; /* Removed blur/white box */
+  box-shadow: none;
 }
 
 .hidden-message.show {
@@ -208,20 +206,18 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic - starts immediately
-document.addEventListener("DOMContentLoaded", function() {
-  const slides = document.querySelectorAll('.bgSlide');
-  let slideIndex = 0;
+// Slideshow logic (starts immediately)
+const slides = document.querySelectorAll('.bgSlide');
+let slideIndex = 0;
 
-  function showSlides() {
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[slideIndex].classList.add('active');
-    slideIndex = (slideIndex + 1) % slides.length;
-    setTimeout(showSlides, 4000);
-  }
+function showSlides() {
+  slides.forEach(slide => slide.classList.remove('active'));
+  slides[slideIndex].classList.add('active');
+  slideIndex = (slideIndex + 1) % slides.length;
+  setTimeout(showSlides, 4000);
+}
 
-  showSlides(); // start immediately
-});
+showSlides(); // start immediately
 
 // Reveal message & hide button
 function revealMessage() {
@@ -243,3 +239,4 @@ function hideSurprise() {
 
 </body>
 </html>
+
