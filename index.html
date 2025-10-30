@@ -56,7 +56,7 @@ html, body {
   text-align: center;
   padding: 30px 20px;
   background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0 15px #2b5c32; /* softer glow */
+  box-shadow: 0 0 25px #1b4628;
   border-radius: 20px;
   max-width: 600px;
   margin: 40px auto;
@@ -66,10 +66,10 @@ html, body {
 h1 {
   font-family: 'Great Vibes', cursive;
   font-size: 3.8rem;
-  background: linear-gradient(45deg, #66b16f, #b0e6a0); /* softer gradient */
+  background: linear-gradient(45deg, #56ab2f, #a8e063);
   -webkit-background-clip: text;
   color: transparent;
-  text-shadow: 0 0 10px #b0e6a0, 0 0 20px #66b16f; /* less intense glow */
+  text-shadow: 0 0 15px #a8e063, 0 0 25px #56ab2f;
   margin-bottom: 25px;
   user-select: none;
 }
@@ -78,18 +78,18 @@ h1 {
   padding: 14px 32px;
   font-size: 1.2rem;
   color: white;
-  background: linear-gradient(45deg, #66b16f, #b0e6a0); /* softer gradient */
+  background: linear-gradient(45deg, #56ab2f, #a8e063);
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.4s ease;
-  box-shadow: 0 0 10px #66b16f; /* softer shadow */
+  box-shadow: 0 0 15px #4caf50;
   margin-top: 15px;
 }
 
 .reveal-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 20px #9fe69a; /* softer hover glow */
+  box-shadow: 0 0 30px #7fff00;
 }
 
 .hidden-message {
@@ -113,19 +113,19 @@ h1 {
 
 .hidden-message h2 {
   margin-bottom: 10px;
-  color: #b0e6a0; /* softer */
+  color: #a8e063;
 }
 
 .hidden-message img {
   max-width: 220px;
   border-radius: 15px;
   margin-top: 20px;
-  box-shadow: 0 0 15px #66b16faa; /* softer */
+  box-shadow: 0 0 20px #4caf50aa;
   user-select: none;
 }
 
 .caption {
-  color: #b0e6a0;
+  color: #a8e063;
   font-style: italic;
   margin-top: 8px;
   font-size: 1.1rem;
@@ -165,17 +165,17 @@ h1 {
   <div class="bgSlide" style="background-image: url('14.jpg');"></div>
   <div class="bgSlide" style="background-image: url('21.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('3.jpg');"></div>
-  <div class="bgSlide" style="background-image: url('30.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('33.PNG');"></div>
-  <div class="bgSlide" style="background-image: url('38.PNG');"></div>
-  <div class="bgSlide" style="background-image: url('42.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('43.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('45.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('47.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('49.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('50.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('61.JPEG');"></div>
-  <div class="bgSlide" style="background-image: url('67.JPEG');"></div>
+  <div class="bgSlide" style="background-image: url('30.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('33.png');"></div>
+  <div class="bgSlide" style="background-image: url('38.png');"></div>
+  <div class="bgSlide" style="background-image: url('42.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('43.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('45.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('47.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('49.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('50.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('61.jpeg');"></div>
+  <div class="bgSlide" style="background-image: url('67.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('74.jpeg');"></div>
   <div class="bgSlide" style="background-image: url('9.jpg');"></div>
   <div class="bgSlide" style="background-image: url('Black Kitten-.jpg');"></div>
@@ -208,19 +208,18 @@ for (let i = 0; i < 50; i++) {
   document.body.appendChild(star);
 }
 
-// Slideshow logic
+// Slideshow logic (fade effect)
 const slides = document.querySelectorAll('.bgSlide');
 let slideIndex = 0;
 
 function showSlides() {
-  slides.forEach((slide, idx) => slide.classList.remove('active'));
-  slides[slideIndex].classList.add('active');
+  slides.forEach(slide => slide.classList.remove('active'));
   slideIndex = (slideIndex + 1) % slides.length;
+  slides[slideIndex].classList.add('active');
   setTimeout(showSlides, 4000);
 }
 
 window.onload = () => {
-  slides[0].classList.add('active');
   setTimeout(showSlides, 4000);
 };
 
